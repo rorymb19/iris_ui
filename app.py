@@ -1,23 +1,23 @@
 import streamlit as st
 import pandas as pd
+import gdown
 from sklearn.tree import DecisionTreeClassifier
 
-st.title("CSV File Uploader")
+# --- DOWNLOAD DATA ---
+file_id = "1FBCKZI4KKtlvZaY8XgvAcvLHo5We0ORF"
+url = f"https://drive.google.com/uc?export=download&id={file_id}"
+output = "Iris.csv"
 
-# 1. Create the file uploader widget
-uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
+@st.cache_data
+def load_data():
+    gdown.download(url, output, quiet=False)
+    return pd.read_csv(output)
 
-if uploaded_file is not None:
-    # 2. Read the file into a Pandas DataFrame
-    df = pd.read_csv(uploaded_file)
-    
-    # 3. Display the DataFrame
-    st.subheader("Data Preview")
-    st.write(df)
-else:
-    st.info("Please upload a CSV file to begin.")
+df = load_data()
 
-df = pd.read_csv(uploaded_file)
+st.write("Dataset Preview")
+st.write(df)
+
 # --- PREPARE DATA ---
 # Example assumes Iris dataset format
 X = df.drop(columns=["Id","Species"])   # features
