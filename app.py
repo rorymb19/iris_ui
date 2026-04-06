@@ -15,7 +15,7 @@ def load_data():
 
 df = load_data()
 
-st.write("Dataset Preview")
+st.write("Iris Dataset Preview")
 st.write(df)
 
 # --- PREPARE DATA ---
@@ -26,8 +26,6 @@ y = df["Species"]                 # target
 # --- TRAIN MODEL ---
 model = DecisionTreeClassifier()
 model.fit(X, y)
-
-st.success("Model trained successfully!")
 
 # --- USER INPUT ---
 st.sidebar.header("Input Features")
@@ -48,3 +46,4 @@ predictBtn = st.sidebar.button("Predict")
 if predictBtn:
     st.write("### Prediction:")
     st.write(prediction[0])
+    st.success("Successfully Predict")
