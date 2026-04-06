@@ -40,4 +40,4 @@ predictBtn = st.sidebar.button("Predict")
 if predictBtn:
     st.write("### Prediction:")
     st.write(prediction[0])
-    st.success("Successfully Predict")
+
